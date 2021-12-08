@@ -1,0 +1,28 @@
+{{#if name}}
+  <a href="/entries/new" class="block button w-100 mar-t-2 mar-b-3 pad-2 round-1 text-c center">User Login</a>
+{{/if}}
+
+<h1>Мои щебеты</h1>
+<ul>
+  {{#each posts}}
+    <li class="entry-item pad-b-4">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/detail_9b31eaf4376cdff03e0ba1bcaa826a01.jpg" class="img-fluid rounded-start" alt="кар... кар...">
+            <p>Created at {{this.createdAt}}</p>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ this.User.name }} щебечет:</h5>
+              <p>{{this.likes}} лайков</p>
+              <a href="/personal/edit/{{this.id}}">Edit</a>
+              <a href="/personal/del/{{this.id}}">Delete</a>
+              <p class="card-text">{{this.post}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  {{/each}}
+</ul>

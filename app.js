@@ -35,8 +35,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(session(sessionConfig));
 
-// const indexRouter = require('./routes/index');
-// const entriesRouter = require('./routes/entries');
+const indexRouter = require('./routes/index');
+const entriesRouter = require('./routes/entries');
 // const regRouter = require('./routes/reg');
 // const loginRouter = require('./routes/login');
 // const logoutRouter = require('./routes/logout');
@@ -49,8 +49,8 @@ app.use(session(sessionConfig));
 //   next();
 // });
 
-// app.use('/', indexRouter);
-// app.use('/entries', entriesRouter);
+app.use('/', indexRouter);
+app.use('/entries', entriesRouter);
 // app.use('/reg', regRouter);
 // app.use('/login', loginRouter);
 // app.use('/logout', logoutRouter);

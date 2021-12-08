@@ -1,0 +1,23 @@
+<div class="smoke">
+<span>S</span><span>I</span><span>G</span><span>N</span>&nbsp;<span>U</span><span>P</span>&nbsp;<span>T</span><span>O</span>&nbsp;<span>T</span><span>A</span><span>K</span><span>E</span>&nbsp;<span>D</span><span>I</span><span>S</span><span>C</span><span>O</span><span>U</span><span>N</span><span>T</span>&nbsp;<span>C</span><span>O</span><span>U</span><span>P</span><span>O</span><span>N</span>
+</div>
+<h2>Retrained and get your new job</h2>
+{{#each courses}}
+  <div class="card mb-3">
+    <img src="{{this.thumbnail}}" class="card-img-top" alt="picture">
+    <div class="card-body">
+      <h5 class="card-title">{{this.title}}</h5>
+      <p class="card-text">{{this.description}}</p>
+      <div class="d-flex justify-content-between">
+        <p class="card-text"><small>Last updated: {{this.last_updated}}</small></p>
+        <div class="d-flex">
+          {{#if user}}
+            <div><a href="#" class="btn btn-outline-primary me-3">More...</a></div>
+            <div><a href="#" class="btn btn-outline-primary">Get coupon!</a></div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+{{/each}}
