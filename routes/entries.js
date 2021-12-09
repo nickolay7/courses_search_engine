@@ -1,7 +1,7 @@
 const axios = require('axios');
 const router = require('express').Router();
 const { Course, User } = require('../db/models/');
-const { lastQuery, onQuery } = require('../public/data');
+// const { lastQuery, onQuery } = require('../public/data');
 const { app, serverStart } = require('../server');
 
 function isLogged(req, res, next) {
@@ -24,18 +24,16 @@ router.get('/', async (req, res) => {
     }
   };
 
-  // let lastQuery;
-  // try {
-  //   const response = await axios.request(options);
-  //   lastQuery = await response.data;
-  //   // console.log(lastQuery);
-  //   // res.locals.lastQuery = lastQuery;
-  // } catch (error) {
-  //   return res.render('error', {
-  //     message: 'Server is lost;)',
-  //     error: {}
-  //   });
-  // }
+  let lastQuery;
+  try {
+    const response = await axios.request(options);
+    lastQuery = await response.data;
+  } catch (error) {
+    return res.render('error', {
+      message: 'Server is lost;)',
+      error: {}
+    });
+  }
   const courses = req.session.user ? lastQuery : lastQuery.slice(0, 3);
   app.locals.onQuery = withNewDate(lastQuery);
 
@@ -44,15 +42,6 @@ router.get('/', async (req, res) => {
 
 router.post('/', isLogged, async (req, res) => {
   const { query } = req.body;
-  // try {
-  //   await Post.create({post: post, user_id: res.locals.id});
-  //   return res.redirect('/');
-  // } catch (error) {
-  //   res.render('error', {
-  //     message: 'Не удалось добавить запись в базу данных.',
-  //     error: {}
-  //   });
-  // }
   let options = {
     method: 'GET',
     url: `https://udemy-courses-coupon-code.p.rapidapi.com/api/udemy_course/${ query }`,
@@ -62,18 +51,17 @@ router.post('/', isLogged, async (req, res) => {
     }
   };
 
-  // let onQuery;
-  // try {
-  //   const response = await axios.request(options);
-  //   onQuery = await response.data;
-  //   console.log(onQuery);
-  // } catch (error) {
-  //   return res.render('error', {
-  //     message: 'Server is lost;)',
-  //     error: {}
-  //   });
-  // }
-  // const courses = req.session.user ? onQuery : onQuery.slice(0, 3);
+  let onQuery;
+  try {
+    const response = await axios.request(options);
+    onQuery = await response.data;
+    console.log(onQuery);
+  } catch (error) {
+    return res.render('error', {
+      message: 'Server is lost;)',
+      error: {}
+    });
+  }
   app.locals.onQuery = withNewDate(onQuery);
   console.log(app.locals.onQuery)
   if (onQuery.length === 0) {
