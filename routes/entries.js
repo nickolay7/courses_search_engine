@@ -63,7 +63,6 @@ router.post('/', isLogged, async (req, res) => {
     });
   }
   app.locals.onQuery = withNewDate(onQuery);
-  console.log(app.locals.onQuery)
   if (onQuery.length === 0) {
     return res.render('entries/warn');
   }
