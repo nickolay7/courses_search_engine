@@ -1,7 +1,8 @@
 const axios = require('axios');
 const router = require('express').Router();
-const { Post, User } = require('../db/models/');
+const { Course, User } = require('../db/models/');
 const { lastQuery, onQuery } = require('../public/data');
+const { app, serverStart } = require('../server');
 
 function isLogged(req, res, next) {
   if (req.session.user) return next();
@@ -10,7 +11,7 @@ function isLogged(req, res, next) {
 
 const withNewDate = (items) => {
   const transform = (date) => new Date(date);
-  return items.map((el) => ({ ...el, last_updated: transform(el.last_updated) }));
+  return items.map((el, index) => ({ ...el, last_updated: transform(el.last_updated), id: index, category: el.category[0] }));
 }
 
 router.get('/', async (req, res) => {
@@ -23,12 +24,12 @@ router.get('/', async (req, res) => {
     }
   };
 
-  // let data;
+  // let lastQuery;
   // try {
   //   const response = await axios.request(options);
-  //   data = await response.data;
-  //   console.log(data)
-  //   // res.locals.data = data;
+  //   lastQuery = await response.data;
+  //   // console.log(lastQuery);
+  //   // res.locals.lastQuery = lastQuery;
   // } catch (error) {
   //   return res.render('error', {
   //     message: 'Server is lost;)',
@@ -36,8 +37,9 @@ router.get('/', async (req, res) => {
   //   });
   // }
   const courses = req.session.user ? lastQuery : lastQuery.slice(0, 3);
+  app.locals.onQuery = withNewDate(lastQuery);
 
-  return res.render('entries/index', { courses: withNewDate(courses) });
+  return res.render('entries/index', { ok: req.query.ok, courses: withNewDate(courses) });
 });
 
 router.post('/', isLogged, async (req, res) => {
@@ -60,24 +62,25 @@ router.post('/', isLogged, async (req, res) => {
     }
   };
 
-
-
-  // let courses;
+  // let onQuery;
   // try {
   //   const response = await axios.request(options);
-  //   courses = await response.data;
-  //   console.log(courses)
-  //   // res.locals.data = data;
+  //   onQuery = await response.data;
+  //   console.log(onQuery);
   // } catch (error) {
   //   return res.render('error', {
   //     message: 'Server is lost;)',
   //     error: {}
   //   });
   // }
+  // const courses = req.session.user ? onQuery : onQuery.slice(0, 3);
+  app.locals.onQuery = withNewDate(onQuery);
+  console.log(app.locals.onQuery)
+  if (onQuery.length === 0) {
+    return res.render('entries/warn');
+  }
 
-  const courses = req.session.user ? onQuery : onQuery.slice(0, 3);
-
-  return res.render('entries/index', { courses: withNewDate(courses) });
+  return res.render('entries/index', { courses: withNewDate(onQuery) });
 });
 
 module.exports = router;

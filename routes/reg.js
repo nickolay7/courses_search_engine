@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     res.redirect('/reg?error=user_already_exists');
   }
   await User.create({ name, email, password: hash });
-  res.redirect('/');
+  res.redirect('/entries/?ok=That\'s ok!');
 });
 
 module.exports = router;

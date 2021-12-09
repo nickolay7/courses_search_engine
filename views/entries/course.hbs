@@ -1,0 +1,14 @@
+<div id="course" class="card bg-dark text-white">
+  <img src="{{course.thumbnail}}" class="card-img" alt="picture">
+  <div class="card-img-overlay">
+    <h2 class="card-title">{{course.title}}({{course.category}})</h2>
+    <p class="card-text">{{course.description}}</p>
+    <p class="card-text">Last updated: {{course.last_updated}}</p>
+    <p class="card-text">Discount coupon: {{course.coupon_code}}</p>
+    <p class="card-text">{{course.original_price}}</p>
+    <p class="btn btn-outline-primary"><a href="{{course.url}}" target="_blank">Go to course</a></p>
+    <p class="btn btn-outline-primary"><a href="/course/{{course.id}}/add">Bookmark</a></p>
+    <p class="btn btn-outline-primary"><a href="/">Home</a></p>
+    <h2 style="color: green">{{message}}</h2>
+  </div>
+</div>

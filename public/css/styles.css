@@ -7,7 +7,7 @@ body {
   /*font-family: "Finger Paint", serif !important;*/
 }
 
-h1, h2, h5, p {
+h1, h2, h3, h5, p {
   color: orange;
 }
 
@@ -29,6 +29,10 @@ div.card {
   width: 50%;
   background-color: #164253;
   box-shadow: 0 0 5px 10px #164253;
+}
+
+#course {
+  width: 80%;
 }
 
 .smoke {
@@ -78,7 +82,7 @@ span:nth-child(even){
   }
 }
 
-@for $item from 1 through 30 {
+@for $item from 1 through 29 {
   span:nth-of-type(#{$item}){
     animation-delay: #{(3 + ($item/10))}s;
   }

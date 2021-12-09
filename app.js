@@ -37,22 +37,22 @@ app.use(session(sessionConfig));
 
 const indexRouter = require('./routes/index');
 const entriesRouter = require('./routes/entries');
-// const regRouter = require('./routes/reg');
-// const loginRouter = require('./routes/login');
-// const logoutRouter = require('./routes/logout');
-// const likeRouter = require('./routes/like');
-// const personalRouter = require('./routes/personal');
+const regRouter = require('./routes/reg');
+const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
+const likeRouter = require('./routes/course');
+const personalRouter = require('./routes/personal');
 
-// app.use((req, res, next) => {
-//   res.locals.user = req.session.user;
-//   res.locals.id = req.session.userId;
-//   next();
-// });
+app.use((req, res, next) => {
+  res.locals.user = req.session.user;
+  res.locals.id = req.session.userId;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/entries', entriesRouter);
-// app.use('/reg', regRouter);
-// app.use('/login', loginRouter);
-// app.use('/logout', logoutRouter);
-// app.use('/toLike', likeRouter);
-// app.use('/personal', personalRouter);
+app.use('/reg', regRouter);
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
+app.use('/course', likeRouter);
+app.use('/personal', personalRouter);
