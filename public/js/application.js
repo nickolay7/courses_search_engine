@@ -1,4 +1,4 @@
-// const TOKEN = '5006117405:AAHC5R8y0cE2h2uNEiUkTsOjTD_BiH7FkdY';
+// const TOKEN = '5006117405:AAE3ppX2whJgV5LlkxC1ck4m75g07JnIbdo';
 // const BASE_URL = `https://api.telegram.org/bot${TOKEN}/`
 // const getMe = `${BASE_URL}getMe`;
 // const sendMessage = `${BASE_URL}sendMessage?chat_id=1447651842&text=Hello Fedya!`;

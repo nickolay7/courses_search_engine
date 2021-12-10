@@ -5,7 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-// const cors = require('cors');
+const cors = require('cors');
 const { app, serverStart } = require('./server');
 const { connect } = require('./db');
 
@@ -32,7 +32,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(cors({ credentials: true, origin: '*' }));
+app.use(cors({ credentials: true, origin: '*' }));
 app.use(cookieParser());
 app.use(session(sessionConfig));
 
