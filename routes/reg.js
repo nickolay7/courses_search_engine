@@ -16,6 +16,10 @@ router.post('/', async (req, res) => {
     res.redirect('/reg?error=user_already_exists');
   }
   await User.create({ name, email, password: hash });
+  // const userForConfirm = await User.findOne({ where: { email: email }});
+  // if (userForConfirm) {
+  //
+  // }
   res.redirect('/entries/?ok=That\'s ok!');
 });
 

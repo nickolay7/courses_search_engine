@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="d-flex flex-column bd-highlight mx-3 my-3 align-items-center">
-  <div class="d-flex my-5">
+  <div class="d-flex my-5 header">
     <h1><a href="/" style="text-decoration: none; color: orange;">Courses search engine</a></h1>
     <div class="d-flex">
       {{#if user}}
@@ -26,7 +26,7 @@
     <div class="mx-3 mt-1" style="color: orange;"><h3>Hello, {{user}}!</h3></div>
   {{/if}}
   <h2 class="my-3">Find your course</h2>
-  <form  method="post" action="/entries"class="row g-3">
+  <form  method="post" action="/entries" class="row g-3">
     <div class="col-auto">
       <input type="text" class="form-control mx-5" name="query" placeholder="Take a step towards your dream...">
     </div>

@@ -1,9 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Finger+Paint);
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 
 body {
   background: url("https://zagerclinic.ru/.files/5820/images/a_11.jpg") no-repeat fixed;
   background-size: cover;
-  /*font-family: "Finger Paint", serif !important;*/
+  font-family: 'Acme', sans-serif;
 }
 
 h1, h2, h3, h5, p {
@@ -84,5 +85,23 @@ span:nth-child(even){
 @for $item from 1 through 29 {
   span:nth-of-type(#{$item}){
     animation-delay: #{(3 + ($item/10))}s;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1400px) {}
+
+@media (max-width: 767px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  div.card {
+    width: 100%;
+  }
+
+  body {
+    font-size: 25px;
   }
 }
