@@ -21,8 +21,7 @@ const sessionConfig = {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24,
     secure: process.env.NODE_ENV === 'production',
-  },
-  credentials: true,
+  }
 };
 
 
