@@ -45,7 +45,7 @@ app.use(express.json());
 app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(session(sessionConfig));
-// myStore.sync();
+myStore.sync();
 
 const indexRouter = require('./routes/index');
 const entriesRouter = require('./routes/entries');
