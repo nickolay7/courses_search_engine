@@ -1,6 +1,6 @@
 const axios = require('axios');
 const router = require('express').Router();
-const { lastQuery, onQuery } = require('../public/data');
+// const { lastQuery, onQuery } = require('../public/data');
 const { app } = require('../server');
 
 function isLogged(req, res, next) {
@@ -23,16 +23,16 @@ router.get('/', async (req, res) => {
     }
   };
 
-  // let lastQuery;
-  // try {
-  //   const response = await axios.request(options);
-  //   lastQuery = await response.data;
-  // } catch (error) {
-  //   return res.render('error', {
-  //     message: 'Server is lost;)',
-  //     error: {}
-  //   });
-  // }
+  let lastQuery;
+  try {
+    const response = await axios.request(options);
+    lastQuery = await response.data;
+  } catch (error) {
+    return res.render('error', {
+      message: 'Server is lost;)',
+      error: {}
+    });
+  }
   const courses = req.session.user ? lastQuery : lastQuery.slice(0, 3);
   app.locals.onQuery = withNewDate(lastQuery);
 
@@ -50,17 +50,17 @@ router.post('/', isLogged, async (req, res) => {
     }
   };
 
-  // let onQuery;
-  // try {
-  //   const response = await axios.request(options);
-  //   onQuery = await response.data;
-  //   console.log(onQuery);
-  // } catch (error) {
-  //   return res.render('error', {
-  //     message: 'Server is lost;)',
-  //     error: {}
-  //   });
-  // }
+  let onQuery;
+  try {
+    const response = await axios.request(options);
+    onQuery = await response.data;
+    console.log(onQuery);
+  } catch (error) {
+    return res.render('error', {
+      message: 'Server is lost;)',
+      error: {}
+    });
+  }
   app.locals.onQuery = withNewDate(onQuery);
   if (onQuery.length === 0) {
     return res.render('entries/warn');

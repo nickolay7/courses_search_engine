@@ -31,7 +31,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors({ credentials: true, origin: '*' }));
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(session(sessionConfig));
 
