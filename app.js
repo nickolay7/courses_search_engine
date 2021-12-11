@@ -28,6 +28,7 @@ const sessionConfig = {
   secret: process.env.SESSION_SECRET ?? ['keyboard cat', 'old keyword'],
   resave: false,
   saveUninitialized: false,
+  proxy : true,
   cookie: {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24,
