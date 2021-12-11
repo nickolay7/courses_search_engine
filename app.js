@@ -1,18 +1,29 @@
 const express = require('express');
+const Sequelize = require("sequelize");
 const createError = require('http-errors');
 const logger = require('morgan');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const FileStore = require('session-file-store')(session);
+// const FileStore = require('session-file-store')(session);
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const cors = require('cors');
 const { app, serverStart } = require('./server');
 const { connect } = require('./db');
 
 serverStart().then(connect);
 
+const sequelize = new Sequelize("database", "username", "password", {
+  dialect: "sqlite",
+  storage: "./session.sqlite",
+});
+
+const myStore = new SequelizeStore({
+  db: sequelize,
+});
+
 const sessionConfig = {
-  store: new FileStore(),
+  store: myStore,
   name: 'sid',
   secret: process.env.SESSION_SECRET ?? ['keyboard cat', 'old keyword'],
   resave: false,
@@ -34,6 +45,7 @@ app.use(express.json());
 app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(session(sessionConfig));
+// myStore.sync();
 
 const indexRouter = require('./routes/index');
 const entriesRouter = require('./routes/entries');
